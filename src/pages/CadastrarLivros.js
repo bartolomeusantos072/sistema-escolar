@@ -1,72 +1,68 @@
+import { useState, useEffect } from "react";
+import { useTheme } from '../context/ThemeContext'; // Importante para o Desafio 4
+import styles from './CadastrarLivros.module.css'; // Reaproveitando o CSS
+import LivroForm from "../components/LivroForm";
+import LivroList from "../components/LivroList";
 
-import { useState } from "react";
-import styles from './Biblioteca.module.css'; // Usando o mesmo CSS para manter o padrão
+function CadastrarLivros() {
+    const { darkMode } = useTheme(); // Consumindo o tema global
+    const [mensagem, setMensagem] = useState('');
+    const [livros, setLivros] = useState([]);
 
-function CadastroLivro() {
-    const [titulo, setTitulo] = useState('');
-    const [autor, setAutor] = useState('');
+    // URL do seu JSON Server
+    const url = "http://localhost:5000/livros";
 
-    const cadastrarLivro = async (e) => {
-        e.preventDefault();
+    // Carregar livros ao abrir a página
+    useEffect(() => {
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setLivros(data))
+            .catch(err => console.error("Erro ao carregar livros:", err));
+    }, []);
 
+    // Função para adicionar (POST no banco)
+    async function adicionarLivro(titulo, autor) {
         const novoLivro = { titulo, autor };
 
         try {
-            const resp = await fetch("http://localhost:5001/livros", {
+            const resp = await fetch(url, {
                 method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(novoLivro)
             });
 
             if (resp.ok) {
-                alert("Livro cadastrado com sucesso!");
-                setTitulo(''); // Limpa o campo
-                setAutor('');  // Limpa o campo
+                const livroSalvo = await resp.json();
+                setLivros([...livros, livroSalvo]); // Atualiza a lista na tela
+                setMensagem('Livro cadastrado com sucesso!');
+                setTimeout(() => setMensagem(''), 3000);
             }
         } catch (err) {
-            console.error("Erro ao cadastrar:", err);
+            console.error("Erro ao salvar:", err);
         }
-    };
+    }
+
+    // Função para remover (DELETE no banco)
+    async function removerLivro(id) {
+        await fetch(`${url}/${id}`, { method: "DELETE" });
+        setLivros(livros.filter(livro => livro.id !== id));
+    }
 
     return (
-        <div className={styles.container}>
-            <h1>Cadastrar Livro</h1>
-            <form onSubmit={cadastrarLivro}>
-                <div style={{ marginBottom: '15px' }}>
-                    <label style={{ display: 'block' }}>Título:</label>
-                    <input 
-                        type="text" 
-                        value={titulo}
-                        onChange={(e) => setTitulo(e.target.value)}
-                        required
-                        style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
-                    />
-                </div>
-                <div style={{ marginBottom: '15px' }}>
-                    <label style={{ display: 'block' }}>Autor:</label>
-                    <input 
-                        type="text" 
-                        value={autor}
-                        onChange={(e) => setAutor(e.target.value)}
-                        required
-                        style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
-                    />
-                </div>
-                <button type="submit" style={{
-                    padding: '10px 20px',
-                    backgroundColor: '#28a745',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer'
-                }}>
-                    Salvar Livro
-                </button>
-            </form>
+        /* Aplicando a lógica do Dark Mode para o Desafio 4 */
+        <div className={`${styles.container} ${darkMode ? 'dark-mode-global' : ''}`}>
+            <h1>Cadastrar Livros</h1>
+
+            {mensagem && <p className={styles.sucesso}>{mensagem}</p>}
+
+            <LivroForm adicionarLivro={adicionarLivro} />
+            
+            <hr style={{ margin: '20px 0', borderColor: 'var(--border-color)' }} />
+            
+            <h3>Livros no Acervo</h3>
+            <LivroList livros={livros} removerLivro={removerLivro} />
         </div>
     );
 }
 
-export default CadastroLivro;
+export default CadastrarLivros;

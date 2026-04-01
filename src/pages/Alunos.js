@@ -8,11 +8,9 @@ function Alunos() {
     const [busca, setBusca] = useState('');
 
     useEffect(() => {
-        // Criamos uma função assíncrona dentro do useEffect
         const carregarDados = async () => {
             try {
-                // 1. Faz a requisição ao arquivo JSON (deve estar na pasta /public)
-                const resposta = await fetch('/db.json');
+               const resposta = await fetch('http://localhost:5000/alunos')
                 
                 if (!resposta.ok) {
                     throw new Error("Erro ao buscar os dados");
@@ -20,7 +18,6 @@ function Alunos() {
 
                 const dados = await resposta.json();
 
-                // 2. Simula o atraso de 2 segundos conforme o seu código original
                 setTimeout(() => {
                     setAlunos(dados);
                     setLoading(false);

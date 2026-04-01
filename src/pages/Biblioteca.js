@@ -5,26 +5,23 @@ import styles from './Biblioteca.module.css';
 function Biblioteca() {
     const [livros, setLivros] = useState([]);
     const [loading, setLoading] = useState(true);
+    
 
     useEffect(() => {
-        const buscarLivros = async () => {
-            try {
-                // O await substitui o .then()
-                const resp = await fetch("http://localhost:5001/livros");
-                const data = await resp.json();
-                
-                // Mantendo o seu delay de 2s para o loading
-                setTimeout(() => {
-                    setLivros(data);
-                    setLoading(false);
-                }, 2000);
-            } catch (err) {
-                console.log("Erro ao buscar livros:", err);
-                setLoading(false);
-            }
-        };
+    const carregarLivros = async () => {
+        try {
+           const resposta = await fetch('http://localhost:5000/livros')
+            const dadosCompletos = await resposta.json();
+    
+            setLivros(dadosCompletos);     
+            setLoading(false);
+        } catch (erro) {
+            console.error("Erro:", erro);
+            setLoading(false);
+        }
+    };
 
-        buscarLivros();
+    carregarLivros();
     }, []);
 
     if (loading) {

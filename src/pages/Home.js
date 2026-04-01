@@ -1,13 +1,20 @@
 import { useTheme } from '../context/ThemeContext';
 import styles from './Home.module.css';
-import { FaSun, FaMoon, FaUserGraduate, FaClipboardList, FaBook } from 'react-icons/fa';
+import { FaUserGraduate, FaClipboardList, FaBook } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AiFillDashboard } from 'react-icons/ai';
 
 function Home() {
-    // 2. REMOVA o useState daqui. 
-    // Agora pegamos o estado e a função do "serviço global" de tema.
-    const { darkMode, toggleTheme } = useTheme();
+    const { darkMode } = useTheme();
+
+    // 1. Array de Configuração dos Cards (Dados)
+    const cardsInfo = [
+        { id: 1, titulo: 'Cadastro', desc: 'Gerenciamento de alunos', rota: '/cadastrarAlunos', icon: <FaUserGraduate className={styles.icon}/> },
+        { id: 2, titulo: 'Alunos', desc: 'Alunos matriculados', rota: '/Alunos', icon: <FaClipboardList className={styles.icon}/> },
+        { id: 3, titulo: 'Biblioteca', desc: 'Acervo de livros', rota: '/Biblioteca', icon: <FaBook className={styles.icon}/> },
+        { id: 4, titulo: 'Livro', desc: 'Cadastrar livros', rota: '/cadastrarLivros', icon: <FaBook className={styles.icon}/> },
+        { id: 5, titulo: 'Dashboard', desc: 'Estatísticas da escola', rota: '/Dashboard', icon: <AiFillDashboard className={styles.icon}/> }
+    ];
 
     const alunosPorSerie = [
         { serie: '1º ano', total: 12 },
@@ -16,44 +23,24 @@ function Home() {
     ];
 
     return (
-        // 3. A lógica de classes continua funcionando, mas lendo o darkMode GLOBAL
-        <div className={styles.container}>
+        /* 2. Aplicação do Dark Mode no container principal */
+        <div className={`${styles.container} ${darkMode ? 'dark-mode-global' : ''}`}>
             
             <header className={styles.header}>
                 <h1>Home</h1>
-                <div>
                 <p>Bem vindos à Escola React.js</p>
-                </div>
-
-                
             </header>
 
+            {/* 3. Renderização Automática dos Cards */}
             <section className={styles.cards}>
-                <div className={styles.card}>
-                    <FaUserGraduate className={styles.icon}/>
-                    <h3>Cadastro</h3>
-                    <p>Gerenciamento de alunos</p>
-                    <Link to='/cadastarAlunos'>Acessar</Link>
-                </div>
-                {/* ... restante dos cards (Alunos, Biblioteca, Dashboard) ... */}
-                <div className={styles.card}>
-                    <FaClipboardList className={styles.icon}/>
-                    <h3>Alunos</h3>
-                    <p>Alunos matriculados</p>
-                    <Link to='/Alunos'>Acessar</Link>
-                </div>
-                <div className={styles.card}>
-                    <FaBook className={styles.icon}/>
-                    <h3>Biblioteca</h3>
-                    <p>Encontre os livros em nosso acervo</p>
-                    <Link to='/Biblioteca'>Acessar</Link>
-                </div>
-                <div className={styles.card}>
-                    <AiFillDashboard className={styles.icon}/>
-                    <h3>Dashboard</h3>
-                    <p>Estatísticas da escola</p>
-                    <Link to='/Dashboard'>Acessar</Link>
-                </div>
+                {cardsInfo.map((card) => (
+                    <div key={card.id} className={styles.card}>
+                        {card.icon}
+                        <h3>{card.titulo}</h3>
+                        <p>{card.desc}</p>
+                        <Link to={card.rota}>Acessar</Link>
+                    </div>
+                ))}
             </section>   
 
             <section className={styles.chart}>
@@ -61,6 +48,7 @@ function Home() {
                 {alunosPorSerie.map((item, index) => (
                     <div key={index} className={styles.barContainer}>
                         <span>{item.serie}</span>
+                        {/* No Dark Mode, verifique se a cor dessa barra está no index.css */}
                         <div className={styles.bar} style={{ width: `${item.total * 10}px` }}>
                             {item.total}
                         </div>

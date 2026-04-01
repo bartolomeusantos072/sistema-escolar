@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import CadastrarAlunos from "./pages/CadastrarAlunos";
 import Alunos from './pages/Alunos';
 import Biblioteca from './pages/Biblioteca';
+import CadastrarLivros from './pages/CadastrarLivros';
 import Dashboard from './pages/Dashboard';
 
 
@@ -19,9 +20,10 @@ function App() {
         <main>
           <Routes>
             <Route path='/' element={<Home/>} />
-            <Route path='/cadastarAlunos' element={<CadastrarAlunos/>} />
+            <Route path='/cadastrarAlunos' element={<CadastrarAlunos/>} />
             <Route path='/Alunos' element={<Alunos/>} />
             <Route path='/Biblioteca' element={<Biblioteca/>} />
+            <Route path="/cadastrarLivros" element={<CadastrarLivros/>}/>
             <Route path='/Dashboard' element={<Dashboard/>} />
           </Routes>
         </main>
