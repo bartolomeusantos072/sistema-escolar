@@ -1,0 +1,8 @@
+[
+    {"id": 1, "nome": "Maria Silva", "curso": "Informática"},
+    {"id": 2, "nome": "João Souza", "curso": "Informática"},
+    {"id": 3, "nome": "Ana Costa", "curso": "Informática"},
+    {"id": 4, "nome": "José da Silva", "curso": "Informática"},
+    {"id": 5, "nome": "Fernanda Santos", "curso": "Informática"},
+    {"id": 6, "nome": "Gabriel Henrique", "curso": "Informática"}
+]

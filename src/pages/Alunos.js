@@ -4,28 +4,37 @@ import styles from './Alunos.module.css';
 function Alunos() {
     const [alunos, setAlunos] = useState([]);
     const [loading, setLoading] = useState(true);
-    
-    // 1. useState para armazenar o valor digitado na busca
     const [busca, setBusca] = useState('');
 
     useEffect(() => {
-        const dados = [
-            { id: 1, nome: 'Maria Silva', curso: 'Informática' },
-            { id: 2, nome: 'João Souza', curso: 'Informática' },
-            { id: 3, nome: 'Ana Costa', curso: 'Informática' },
-            { id: 4, nome: 'José da Silva', curso: 'Informática' },
-            { id: 5, nome: 'Fernanda Santos', curso: 'Informática' },
-            { id: 6, nome: 'Gabriel Henrique', curso: 'Informática' },
-        ];
+        // Criamos uma função assíncrona dentro do useEffect
+        const carregarDados = async () => {
+            try {
+                // 1. Faz a requisição ao arquivo JSON (deve estar na pasta /public)
+                const resposta = await fetch('/db.json');
+                
+                if (!resposta.ok) {
+                    throw new Error("Erro ao buscar os dados");
+                }
 
-        setTimeout(() => {
-            setAlunos(dados);
-            setLoading(false);
-        }, 2000);
+                const dados = await resposta.json();
+
+                // 2. Simula o atraso de 2 segundos conforme o seu código original
+                setTimeout(() => {
+                    setAlunos(dados);
+                    setLoading(false);
+                }, 2000);
+
+            } catch (erro) {
+                console.error("Falha na requisição:", erro);
+                setLoading(false);
+            }
+        };
+
+        carregarDados();
     }, []);
 
-    // 2. Lógica de filtragem: Criamos uma lista filtrada baseada no estado 'busca'
-    // Convertemos ambos para minúsculo para a busca não ser sensível a maiúsculas
+    // Lógica de filtro do Desafio 1
     const alunosFiltrados = alunos.filter(aluno =>
         aluno.nome.toLowerCase().includes(busca.toLowerCase())
     );
@@ -38,18 +47,16 @@ function Alunos() {
         <div className={styles.container}>
             <h1>Lista de Alunos</h1>
 
-            {/* 3. Input de busca */}
             <div className={styles.buscaContainer}>
                 <input
                     type="text"
                     placeholder="Buscar aluno pelo nome..."
                     value={busca}
-                    onChange={(e) => setBusca(e.target.value)} // Evento onChange
+                    onChange={(e) => setBusca(e.target.value)}
                     className={styles.inputBusca}
                 />
             </div>
 
-            {/* 4. Renderização condicional baseada na lista filtrada */}
             {alunosFiltrados.length === 0 ? (
                 <p className={styles.vazio}>Nenhum aluno encontrado.</p>
             ) : (
@@ -62,7 +69,6 @@ function Alunos() {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* 5. Mapeamos a lista filtrada em vez da lista original */}
                         {alunosFiltrados.map(aluno => (
                             <tr key={aluno.id}>
                                 <td>{aluno.id}</td>
