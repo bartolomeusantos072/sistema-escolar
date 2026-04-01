@@ -1,0 +1,30 @@
+{
+    "alunos":[],
+    "livros":[
+        {
+            "id": 1,
+            "titulo": "Fundamentos de React",
+            "autor": "Maria da Silva"
+        },
+        {
+            "id": 2,
+            "titulo": "React na prática",
+            "autor": "Joãp Souza"
+        },
+        {
+            "id": 3,
+            "titulo": "Linguagens de Programação",
+            "autor": "Ana Costa Ribeiro"
+        },
+        {
+            "id": 4,
+            "titulo": "Front End com React",
+            "autor": "Fernando da Silva"
+        },
+        {
+            "id": 5,
+            "titulo": "Desenvolviemnto web",
+            "autor": "Fernando José"
+        }
+    ]
+}

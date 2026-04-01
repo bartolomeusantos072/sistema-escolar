@@ -1,0 +1,48 @@
+.buscaContainer {
+    width: 100%;
+    margin-bottom: 20px; /* Espaço entre o input e a tabela */
+}
+
+.inputBusca {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box; /* Garante que o padding não aumente a largura final */
+    outline: none; /* Remove aquela borda azul padrão do navegador ao clicar */
+}
+
+.inputBusca:focus {
+    border-color: #007bff; /* Uma cor de destaque suave ao clicar para digitar */
+}
+
+/* Ajuste opcional para o título não ficar colado */
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.container{
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f4f6f8;
+    border-radius: 8px;
+}
+
+.vazio{
+    width: 100%;
+    color: gray;
+}
+
+.tabela{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela th,
+.tabela td{
+    padding: 1px 40px;
+    text-align: left;
+}
