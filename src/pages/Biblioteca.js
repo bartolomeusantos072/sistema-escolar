@@ -1,57 +1,42 @@
 import { useState, useEffect } from "react";
-import styles from './Biblioteca.module.css'
+import styles from './Biblioteca.module.css';
 
-
-function Biblioteca(){
-
+function Biblioteca() {
     const [livros, setLivros] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect( ()=> {
-
-        setTimeout( () => {
-            //simulando dados vindo de uma API
-            fetch("http://localhost:5001/livros")
-            .then((resp) => resp.json())
-            .then((data) => {
-                setLivros(data);
+    useEffect(() => {
+        const buscarLivros = async () => {
+            try {
+                // O await substitui o .then()
+                const resp = await fetch("http://localhost:5001/livros");
+                const data = await resp.json();
+                
+                // Mantendo o seu delay de 2s para o loading
+                setTimeout(() => {
+                    setLivros(data);
+                    setLoading(false);
+                }, 2000);
+            } catch (err) {
+                console.log("Erro ao buscar livros:", err);
                 setLoading(false);
-            })
-            .catch((err) => {
-                console.log(err);
-                setLoading(false);
-            });
+            }
+        };
 
-        }, 2000);
-    
-        /*
-        const dados = [
-            {id: 1, titulo: 'Fundamentos de React', autor: 'Maria Silva'},
-            {id: 2, titulo: 'React na prática', autor: 'João Souza'},
-            {id: 3, titulo: 'Linguagens de programação', autor: 'Ana Costa'},
-            {id: 4, titulo: 'Livro 4', autor: 'José da Silva'},
-            {id: 5, titulo: 'Livro 5', autor: 'Fernanda Santos'},
-            {id: 6, titulo: 'Livro 6', autor: 'Gabriel Henrique'},
-        ]
-
-        setTimeout(() =>{
-            setLivros(dados);
-            setLoading(false);
-        }, 2000);
-        */
-
+        buscarLivros();
     }, []);
-    
-    if(loading){
-        return <p>Carregando livros...</p>
+
+    if (loading) {
+        return <p className={styles.loading}>Carregando livros...</p>;
     }
 
-    return(
+    return (
         <div className={styles.container}>
             <h1>Lista de Livros</h1>
 
-            {livros.length === 0 ? (<p>Nenhum livro encontrado</p>) 
-            : (
+            {livros.length === 0 ? (
+                <p className={styles.vazio}>Nenhum livro encontrado</p>
+            ) : (
                 <table className={styles.tabela}>
                     <thead>
                         <tr>
@@ -61,7 +46,7 @@ function Biblioteca(){
                         </tr>
                     </thead>
                     <tbody>
-                        {livros.map(livro =>(
+                        {livros.map(livro => (
                             <tr key={livro.id}>
                                 <td>{livro.id}</td>
                                 <td>{livro.titulo}</td>
@@ -73,7 +58,6 @@ function Biblioteca(){
             )}
         </div>
     );
-    
 }
 
 export default Biblioteca;
