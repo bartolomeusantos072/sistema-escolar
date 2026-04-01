@@ -17,18 +17,15 @@ function Home() {
 
     return (
         // 3. A lógica de classes continua funcionando, mas lendo o darkMode GLOBAL
-        <div className={`${styles.container} ${darkMode ? styles.dark : styles.light}`}>
+        <div className={styles.container}>
             
             <header className={styles.header}>
                 <h1>Home</h1>
+                <div>
                 <p>Bem vindos à Escola React.js</p>
+                </div>
 
-                <button 
-                    className={styles.themeBtn}
-                    onClick={toggleTheme} // 4. Chama a função global
-                >
-                    {darkMode ? <FaSun/> : <FaMoon/>}
-                </button>
+                
             </header>
 
             <section className={styles.cards}>

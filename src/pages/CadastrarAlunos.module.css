@@ -9,15 +9,19 @@
     margin-bottom: 10px;
 }
 
+
 .form{
     display: grid;
     gap: 10px;
     margin-bottom: 20px;
 }
 
-.form input{
+.form input {
     padding: 10px;
     font-size: 16px;
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
 }
 
 .form button{
@@ -37,13 +41,15 @@
     padding: 0;
 }
 
-.item{
+
+.item {
     display: flex;
     justify-content: space-between;
-    background: #f3f4f6;
+    background: var(--bg-card); 
+    color: var(--text-main);
+    
     padding: 10px;
     margin-bottom: 8px;
     border-radius: 5px;
+    border: 1px solid var(--border-color);
 }
-
-

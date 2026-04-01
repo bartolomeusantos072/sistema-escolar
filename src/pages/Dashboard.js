@@ -1,7 +1,6 @@
 
 import DashboardLayout from "../components/dash/DashboardLayout";
 import Card from "../components/dash/Card";
-
 function Dashboard(){
 
     return(

@@ -1,6 +1,9 @@
-
-.card{
-    background: white;
+/* Dentro de Card.module.css */
+.card {
+    /* Em vez de background: white; */
+    background-color: var(--bg-card); 
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
     padding: 20px;
     border-radius: 8px;
     width: 200px;
@@ -18,3 +21,4 @@
     margin-top: 10px;
     font-weight: bold;
 }
+

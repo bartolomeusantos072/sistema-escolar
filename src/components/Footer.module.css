@@ -1,11 +1,13 @@
-.footer{
-    background-color: #f2f2f2;
+.footer {
+    background-color: var(--bg-card); /* Antes era #f2f2f2 */
+    color: var(--text-muted);        /* Antes era #555 */
+    border-top: 1px solid var(--border-color);
     padding: 12px;
     text-align: center;
     margin-top: 40px;
-    color: #555;
-    border-top: 1px solid #ddd;
 }
+
+
 
 .social_list {
     display: flex;
@@ -17,7 +19,7 @@
 
 .social_list a{
     font-size: 24px;
-    color: #444;
+    color: var(--text-main);
     transition: 0.3s;
     cursor: pointer;
 }

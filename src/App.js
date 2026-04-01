@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext"; // Importe o Provider
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
@@ -10,6 +11,7 @@ import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
+    <ThemeProvider>
       <BrowserRouter>
 
         <Header/>
@@ -27,6 +29,7 @@ function App() {
         <Footer/>
 
       </BrowserRouter>
+      </ThemeProvider>
   );
 }
 

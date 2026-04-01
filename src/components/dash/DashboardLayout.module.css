@@ -2,8 +2,10 @@
 .layout{
     display: flex;
     min-height: 100vh;
+    background-color: var(--bg-site);
+    color: var(--text-main);
+    display: flex;
 }
-
 .content{
     background: #f4f6f9;
     flex: 1;

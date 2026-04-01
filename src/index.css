@@ -1,3 +1,27 @@
+/* Cores Padrão (Light) */
+:root {
+  --bg-site: #f4f6f8;      /* Fundo da página */
+  --bg-card: #ffffff;      /* Fundo dos containers/cards/footer */
+  --text-main: #333333;    /* Cor do texto principal */
+  --text-muted: #555555;   /* Cor de textos menores/footer */
+  --border-color: #dddddd; /* Cor de bordas e linhas */
+}
+
+/* Quando o darkMode estiver ativo, mudamos o valor das variáveis */
+.dark-mode-global {
+  --bg-site: #121212;      /* Preto profundo */
+  --bg-card: #1e1e1e;      /* Cinza escuro para contraste */
+  --text-main: #ffffff;    /* Branco */
+  --text-muted: #aaaaaa;   /* Cinza claro */
+  --border-color: #333333; /* Bordas sutis */
+}
+
+body {
+  background-color: var(--bg-site);
+  color: var(--text-main);
+  transition: background 0.3s, color 0.3s;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

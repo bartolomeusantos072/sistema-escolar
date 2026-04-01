@@ -27,7 +27,8 @@ h1 {
     max-width: 600px;
     margin: 40px auto;
     padding: 20px;
-    background: #f4f6f8;
+    color: var(--text-main);
+    background: var(--bg-card);      /* Antes era #f4f6f8 */
     border-radius: 8px;
 }
 
