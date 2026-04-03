@@ -10,7 +10,7 @@ function Biblioteca() {
     useEffect(() => {
     const carregarLivros = async () => {
         try {
-           const resposta = await fetch('http://localhost:5000/livros')
+           const resposta = await fetch('https://api-sistema-escolar-six.vercel.app/livros')
             const dadosCompletos = await resposta.json();
     
             setLivros(dadosCompletos);     
