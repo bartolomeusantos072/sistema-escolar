@@ -10,7 +10,7 @@ function Alunos() {
     useEffect(() => {
         const carregarDados = async () => {
             try {
-               const resposta = await fetch('https://api-sistema-escolar-six.vercel.app/alunos')
+               const resposta = await fetch('https://69cf5600a4647a9fc675448c.mockapi.io/api/alunos')
                 
                 if (!resposta.ok) {
                     throw new Error("Erro ao buscar os dados");
