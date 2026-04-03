@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/sistema-escolar/static/css/main.55e7a704.css",
+    "main.js": "/sistema-escolar/static/js/main.71f0ee21.js",
+    "index.html": "/sistema-escolar/index.html",
+    "main.55e7a704.css.map": "/sistema-escolar/static/css/main.55e7a704.css.map",
+    "main.71f0ee21.js.map": "/sistema-escolar/static/js/main.71f0ee21.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.55e7a704.css",
+    "static/js/main.71f0ee21.js"
+  ]
+}
