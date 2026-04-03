@@ -2,7 +2,7 @@ import styles from '../pages/CadastrarLivros.module.css'
 
 function LivroList({livros, removerLivro}){
 
-    if(livros.length == 0){
+    if(livros.length === 0){
         return <p>Nenhum livro cadastrado.</p>;
     }
     return(
