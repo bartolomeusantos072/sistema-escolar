@@ -9,10 +9,36 @@ function CadastrarAlunos(){
     const [mensagem, setMensagem] = useState('');
     const [alunos, setAlunos] = useState([]);
 
-    function adicionarAluno(nome){
-        setAlunos([...alunos, {nome, id: Date.now() }]);
-        setMensagem('Aluno cadastrado com sucesso!');
-        setTimeout(() => setMensagem(''), 3000);
+    async function adicionarAluno(nome) {
+        
+        // O ", 0" no final evita erro se a lista estiver vazia
+        const maiorId = alunos.reduce((max, aluno) => Math.max(max, Number(aluno.id)), 0);
+        
+        
+        const novoId = (maiorId + 1).toString();
+
+        const novoAluno = { 
+            id: novoId, 
+            nome: nome, 
+            curso: "Informática" 
+        };
+
+        try {
+            const resposta = await fetch('https://sua-api.vercel.app/alunos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(novoAluno),
+            });
+
+            if (resposta.ok) {
+                const alunoSalvo = await resposta.json();
+                setAlunos([...alunos, alunoSalvo]);
+                setMensagem(`Aluno ${alunoSalvo.nome} (ID: ${alunoSalvo.id}) cadastrado!`);
+                setTimeout(() => setMensagem(''), 3000);
+            }
+        } catch (erro) {
+            console.error("Erro ao salvar:", erro);
+        }
     }
 
     function removerAluno(id){

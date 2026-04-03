@@ -10,7 +10,7 @@ function Alunos() {
     useEffect(() => {
         const carregarDados = async () => {
             try {
-               const resposta = await fetch('http://localhost:5000/alunos')
+               const resposta = await fetch('https://api-sistema-escolar-six.vercel.app/alunos')
                 
                 if (!resposta.ok) {
                     throw new Error("Erro ao buscar os dados");
